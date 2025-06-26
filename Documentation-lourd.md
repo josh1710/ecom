@@ -34,12 +34,6 @@ L’application se connecte à une API Node.js qui interroge une base de donnée
 
 ## Architecture
 
-```mermaid
-graph TD;
-  Electron[Electron (Dashboard)] -->|HTTP| API[API Node.js/Express]
-  API -->|SQL| DB[(PostgreSQL/Neon)]
-```
-
 - **Electron** : Affiche l’interface et interroge l’API via `fetch`.
 - **API Node.js** : Fournit les routes `/api/orders` et `/api/help`.
 - **PostgreSQL** : Stocke les commandes (`orders`) et les demandes d’aide (`help_requests`).
