@@ -37,13 +37,6 @@ Le projet repose sur :
 
 ## Architecture
 
-```mermaid
-graph TD;
-  Utilisateur[Utilisateur (navigateur)] -->|HTTP| Frontend[Frontend HTML/CSS/JS]
-  Frontend -->|API REST| Backend[Node.js/Express]
-  Backend -->|SQL| DB[(PostgreSQL/Neon)]
-```
-
 - **Frontend** : Affichage, interactions, appels à l'API via `fetch`.
 - **Backend** : Fournit les routes `/api/articles`, `/api/orders`, `/api/help`.
 - **PostgreSQL** : Stocke les articles, commandes, demandes d'aide.
