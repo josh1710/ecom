@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>✨ Besoin d'aide ?</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-main">
+      <a href="index.html" class="navbar-logo"><span style="font-size:1.3em;vertical-align:middle;">✨</span> PhoneDeal</a>
+      <form class="search-bar" onsubmit="event.preventDefault();">
+        <input type="text" placeholder="Que cherchez-vous ?" />
+        <button type="submit">🔍</button>
+      </form>
+      <div class="navbar-actions-main">
+        <a href="cart.html" class="cart-button" title="Panier">🛒</a>
+      </div>
+    </nav>
+    <nav class="navbar navbar-categories">
+      <div class="dropdown">
+        <button class="dropbtn">Marques</button>
+        <div class="dropdown-content">
+          <a href="#">Apple</a>
+          <a href="#">Honor</a>
+          <a href="#">Samsung</a>
+          <a href="#">Xiaomi</a>
+        </div>
+      </div>
+      <a href="accessoires.html" class="cat-link">Accessoires smartphones</a>
+    </nav>
+  </header>
+  <main>
+    <section class="help-form-block">
+      <h1 class="main-title">Besoin d'aide ?</h1>
+      <form id="help-form" class="help-form">
+        <label>
+          Votre adresse mail :<br>
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Expliquez votre besoin :<br>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <button type="submit" class="help-submit-btn">Envoyer ma demande</button>
+      </form>
+      <p id="help-success" style="color:green;display:none;margin-top:1rem;">Votre demande a bien été envoyée !</p>
+    </section>
+  </main>
+  <script>
+    document.getElementById('help-form').onsubmit = async function(e) {
+      e.preventDefault();
+      const email = this.email.value;
+      const message = this.message.value;
+      const res = await fetch('http://localhost:3001/api/help', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, message })
+      });
+      if (res.ok) {
+        document.getElementById('help-success').style.display = 'block';
+        this.reset();
+      }
+    }
+  </script>
+</body>
+</html>

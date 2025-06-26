@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Tableau de bord PhoneDeal</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f7f9fc; }
+    h1 { text-align: center; color: #2251a4; }
+    .section { background: #fff; margin: 2rem auto; padding: 1.5rem; border-radius: 12px; max-width: 900px; box-shadow: 0 2px 8px #2251a41a; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 0.7rem; border-bottom: 1px solid #e0e0e0; text-align: left; }
+    th { background: #e3eefd; color: #2251a4; }
+    tr:last-child td { border-bottom: none; }
+  </style>
+</head>
+<body>
+  <h1>Tableau de bord PhoneDeal</h1>
+  <div class="section">
+    <h2>Dernières commandes</h2>
+    <table id="orders-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Articles</th>
+          <th>Total (€)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="section">
+    <h2>Demandes d'aide clients</h2>
+    <table id="help-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Email</th>
+          <th>Message</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <script>
+    fetch('http://localhost:3001/api/orders')
+      .then(res => res.json())
+      .then(orders => {
+        const tbody = document.querySelector('#orders-table tbody');
+        orders.forEach(order => {
+          const articles = (order.articles || []).map(a => a.nom).join(', ');
+          tbody.innerHTML += `<tr>
+            <td>${new Date(order.created_at).toLocaleString()}</td>
+            <td>${articles}</td>
+            <td>${order.total}</td>
+          </tr>`;
+        });
+      });
+
+    fetch('http://localhost:3001/api/help')
+      .then(res => res.json())
+      .then(requests => {
+        const tbody = document.querySelector('#help-table tbody');
+        requests.forEach(req => {
+          tbody.innerHTML += `<tr>
+            <td>${new Date(req.created_at).toLocaleString()}</td>
+            <td>${req.email}</td>
+            <td>${req.message}</td>
+          </tr>`;
+        });
+      });
+  </script>
+</body>
+</html>

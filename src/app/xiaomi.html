@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>✨ Xiaomi - Marques</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-main">
+      <a href="index.html" class="navbar-logo"><span style="font-size:1.3em;vertical-align:middle;">✨</span> PhoneDeal</a>
+      <form class="search-bar" onsubmit="event.preventDefault();">
+        <input type="text" placeholder="Que cherchez-vous ?" />
+        <button type="submit">🔍</button>
+      </form>
+      <div class="navbar-actions-main">
+        <a href="cart.html" class="cart-button" title="Panier">🛒</a>
+      </div>
+    </nav>
+    <nav class="navbar navbar-categories">
+      <div class="dropdown">
+        <button class="dropbtn">Marques</button>
+        <div class="dropdown-content">
+          <a href="apple.html">Apple</a>
+          <a href="honor.html">Honor</a>
+          <a href="samsung.html">Samsung</a>
+          <a href="xiaomi.html">Xiaomi</a>
+        </div>
+      </div>
+      <a href="accessoires.html" class="cat-link">Accessoires smartphones</a>
+    </nav>
+  </header>
+  <main>
+    <h1 class="main-title">Xiaomi</h1>
+    <div class="products"></div>
+  </main>
+  <script>
+    fetch('http://localhost:3001/api/articles')
+      .then(res => res.json())
+      .then(articles => {
+        const productsDiv = document.querySelector('.products');
+        productsDiv.innerHTML = '';
+        articles.filter(article =>
+          article.marque && article.marque.toLowerCase() === 'xiaomi'
+        ).forEach(article => {
+          productsDiv.innerHTML += `
+            <div class="product" data-marque="${article.marque}">
+              <img src="${article.image_url}" alt="${article.nom}">
+              <h3>${article.nom}</h3>
+              <p>${article.prix} €</p>
+              <button onclick="addToCart('${article.nom}', ${article.prix}, '${article.image_url}')">Ajouter au panier</button>
+            </div>
+          `;
+        });
+      });
+  </script>
+  <script src="../script.js"></script>
+</body>
+</html> 

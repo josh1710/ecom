@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>✨ Panier</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-main">
+      <a href="index.html" class="navbar-logo"><span style="font-size:1.3em;vertical-align:middle;">✨</span> PhoneDeal</a>
+      <form class="search-bar" onsubmit="event.preventDefault();">
+        <input type="text" placeholder="Que cherchez-vous ?" />
+        <button type="submit">🔍</button>
+      </form>
+      <div class="navbar-actions-main">
+        <a href="#" class="help-btn">Besoin d'aide&nbsp;?</a>
+        <a href="cart.html" class="cart-button" title="Panier">🛒</a>
+      </div>
+    </nav>
+    <nav class="navbar navbar-categories">
+      <div class="dropdown">
+        <button class="dropbtn">Marques</button>
+        <div class="dropdown-content">
+          <a href="#">Apple</a>
+          <a href="#">Honor</a>
+          <a href="#">Samsung</a>
+          <a href="#">Xiaomi</a>
+        </div>
+      </div>
+      <a href="accessoires.html" class="cat-link">Accessoires smartphones</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Votre Panier</h1>
+    <ul id="cart-list"></ul>
+    <p id="total"></p>
+    <button id="checkout-btn" style="display:none; margin-bottom:2rem;">Passer au paiement</button>
+    <section id="payment-section" style="display:none; max-width:400px; margin:2rem auto 0 auto;">
+      <h2>Paiement</h2>
+      <form id="payment-form">
+        <label>Nom sur la carte<br>
+          <input type="text" id="card-name" required autocomplete="cc-name" style="width:100%;margin-bottom:1rem;">
+        </label><br>
+        <label>Numéro de carte<br>
+          <input type="text" id="card-number" maxlength="19" required autocomplete="cc-number" pattern="[0-9 ]{16,19}" style="width:100%;margin-bottom:1rem;">
+        </label><br>
+        <label>Date d'expiration<br>
+          <input type="text" id="card-expiry" maxlength="5" required placeholder="MM/AA" autocomplete="cc-exp" pattern="\d{2}/\d{2}" style="width:100px;margin-bottom:1rem;">
+        </label>
+        <label style="margin-left:1rem;">CVC<br>
+          <input type="text" id="card-cvc" maxlength="4" required autocomplete="cc-csc" pattern="\d{3,4}" style="width:60px;margin-bottom:1rem;">
+        </label><br>
+        <button type="submit" id="pay-btn">Valider le paiement</button>
+      </form>
+      <p id="payment-message" style="color:green;font-weight:bold;"></p>
+    </section>
+    <section class="advantages-block">
+      <h2 class="advantages-title">Vos avantages à chaque achat :</h2>
+      <div class="advantages-list">
+        <div class="advantage-item">
+          <span class="adv-icon">🛡️</span>
+          <span>Garantie commerciale de 12 mois</span>
+        </div>
+        <div class="advantage-item">
+          <span class="adv-icon">🚚</span>
+          <span>Frais de livraison standards offerts</span>
+        </div>
+        <div class="advantage-item">
+          <span class="adv-icon">🔄</span>
+          <span>Retour gratuit sous 30 jours</span>
+        </div>
+        <div class="advantage-item">
+          <span class="adv-icon">🎧</span>
+          <span>Service client aux petits oignons</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../script.js"></script>
+</body>
+</html>
